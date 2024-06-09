@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
+import CustomerBookingsPage from "./components/CustomerBookingsPage";
+import { UserProvider } from "./contexts/UserContext";
+//import RegisterForm from "./pages/RegisterPage";
+import RegisterForm from "./components/RegisterForm";
+import Layout from "./components/Layout";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <UserProvider>
+        <div>
+          <Routes>
+            <Route exact path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route element={<Layout />}>
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route
+                path="/customer-bookings"
+                element={<CustomerBookingsPage />}
+              />
+              </Route>
+          </Routes>
+        </div>
+      </UserProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
