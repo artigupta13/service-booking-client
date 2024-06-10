@@ -1,9 +1,9 @@
 import api from "./axiosConfig";
 
 // Get all jobs
-export const getAllJobs = async () => {
+export const getAllJobs = async (filter) => {
   try {
-    const response = await api.get("/api/Jobs");
+    const response = await api.get("/api/Jobs", { params: filter });
     return response.data;
   } catch (error) {
     console.error("Error fetching Jobs:", error);

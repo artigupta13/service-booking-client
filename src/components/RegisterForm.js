@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Box, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Typography, Box, MenuItem, Select, FormControl, InputLabel, Alert } from '@mui/material';
 import axios from 'axios';
 
 const RegisterForm = () => {
@@ -10,6 +10,7 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('customer');
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -25,10 +26,15 @@ const RegisterForm = () => {
     try {
       const response = await axios.post('/register', user);
       console.log('Registered successfully:', response.data);
-      navigate("/dashboard");
+      setSuccessMessage('Registered successfully! Please log in.'); // Set success message
+      setError(null); // Clear any previous errors
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000); // Navigate to login page after 2 seconds
     } catch (error) {
       setError(error.response?.data?.message || 'Failed to register');
       console.error('Error:', error);
+      setSuccessMessage(null); // Clear any previous success messages
     }
   };
 
@@ -91,6 +97,7 @@ const RegisterForm = () => {
         Register
       </Button>
       {error && <Typography color="error">{error}</Typography>}
+      {successMessage && <Alert severity="success">{successMessage}</Alert>}
     </Box>
   );
 };

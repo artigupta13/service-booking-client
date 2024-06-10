@@ -20,6 +20,7 @@ const ServiceDetails = ({ service }) => {
     })
       .then((response) => {
         setSuccessMessage("Booking successful!");
+        setAppointmentDate("");
       })
       .catch((error) => {
         console.error("Error booking service", error);
@@ -52,6 +53,7 @@ const ServiceDetails = ({ service }) => {
           variant="outlined"
           margin="normal"
           value={appointmentDate}
+          inputProps={{ min: new Date().toISOString().slice(0, 16) }}
           onChange={(e) => setAppointmentDate(e.target.value)}
         />
         <Button
