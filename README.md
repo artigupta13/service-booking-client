@@ -44,14 +44,3 @@ This is a React.js application for managing services and bookings.
 - **Axios**: Promise-based HTTP client for making API requests.
 - **Context API**: For managing global state across components.
 
-## Folder Structure
-service-booking-client/
-├── public/ # Static assets and HTML template
-└── src/ # React application source code
-├── components/ # Reusable UI components
-├── contexts/ # Context providers for managing global state
-├── pages/ # Pages or views of the application
-├── services/ # API service functions
-├── styles/ # CSS stylesheets
-└── utils/ # Utility functions
-
