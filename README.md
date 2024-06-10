@@ -1,6 +1,6 @@
 # Service Booking React App
 
-This is a React.js application for managing jobs and bookings.
+This is a React.js application for managing services and bookings.
 
 ## Setup Instructions
 
@@ -13,7 +13,7 @@ This is a React.js application for managing jobs and bookings.
 2. **Navigate to the project directory:**
 
     ```bash
-    cd job-management-react
+    cd service-booking-client
     ```
 
 3. **Install dependencies:**
@@ -45,4 +45,13 @@ This is a React.js application for managing jobs and bookings.
 - **Context API**: For managing global state across components.
 
 ## Folder Structure
+service-booking-client/
+├── public/ # Static assets and HTML template
+└── src/ # React application source code
+├── components/ # Reusable UI components
+├── contexts/ # Context providers for managing global state
+├── pages/ # Pages or views of the application
+├── services/ # API service functions
+├── styles/ # CSS stylesheets
+└── utils/ # Utility functions
 
