@@ -2,6 +2,8 @@
 
 This is a React.js application for managing services and bookings.
 
+![alt text](public/dashboard.png)
+
 ## Setup Instructions
 
 1. **Clone the repository:**
