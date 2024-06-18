@@ -16,7 +16,7 @@ const LoginForm = () => {
     const user = { email, password };
 
     try {
-      const response = await axios.post("/login", user);
+      const response = await axios.post("/auth/login", user);
       const { token, email, username, role } = response.data;
       login({ token, username, email, role });
       console.log("Logged in successfully:", response.data.token);

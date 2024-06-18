@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { getAllServices } from '../services/serviceApi';
-import ServiceDetails from './ServiceDetails';
-import AddServiceModal from './AddServiceModal';
+import React, { useEffect, useState, useContext, lazy, Suspense } from "react";
+import { getAllServices } from "../services/serviceApi";
 import {
   Container,
   Grid,
@@ -12,9 +10,16 @@ import {
   ListItem,
   ListItemText,
   ListItemButton,
-  Button
-} from '@mui/material';
-import { UserContext } from '../contexts/UserContext';
+  Button,
+} from "@mui/material";
+import { UserContext } from "../contexts/UserContext";
+
+
+// import ServiceDetails from './ServiceDetails';
+// import AddServiceModal from './AddServiceModal';
+
+const ServiceDetails = lazy(() => import("./ServiceDetails"));
+const AddServiceModal = lazy(() => import("./AddServiceModal"));
 
 const ServiceList = () => {
   const [services, setServices] = useState([]);
@@ -28,7 +33,7 @@ const ServiceList = () => {
         const services = await getAllServices();
         setServices(services);
       } catch (error) {
-        console.error('Error fetching services:', error);
+        console.error("Error fetching services:", error);
       }
     };
 
@@ -48,7 +53,7 @@ const ServiceList = () => {
           <Grid item xs={12} md={6}>
             <Paper elevation={3}>
               <List>
-                {services.map(service => (
+                {services.map((service) => (
                   <ListItem key={service._id} disablePadding>
                     <ListItemButton onClick={() => setSelectedService(service)}>
                       <ListItemText
@@ -63,13 +68,15 @@ const ServiceList = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             {selectedService && (
-              <Paper elevation={3} style={{ padding: '16px' }}>
-                <ServiceDetails service={selectedService} />
+              <Paper elevation={3} style={{ padding: "16px" }}>
+                <Suspense fallback={<div>Loading Service Details...</div>}>
+                  <ServiceDetails service={selectedService} />
+                </Suspense>
               </Paper>
             )}
           </Grid>
         </Grid>
-        {user && user.role === 'admin' && (
+        {user && user.role === "admin" && (
           <Box mt={4} display="flex" justifyContent="center">
             <Button variant="contained" color="primary" onClick={handleOpen}>
               Add New Service
@@ -77,7 +84,13 @@ const ServiceList = () => {
           </Box>
         )}
       </Box>
-      <AddServiceModal open={open} handleClose={handleClose} setServices={setServices} />
+      <Suspense fallback={<div>Loading Add Service Modal...</div>}>
+        <AddServiceModal
+          open={open}
+          handleClose={handleClose}
+          setServices={setServices}
+        />
+      </Suspense>
     </Container>
   );
 };

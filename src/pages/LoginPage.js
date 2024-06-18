@@ -24,7 +24,7 @@ const LoginPage = () => {
             <Paper elevation={3} style={{ padding: '16px' }}>
               <RegisterForm />
               <Typography variant="body2" align="center">
-                Already have an account? <Link to="/">Login here</Link>
+                Already have an account? <Link to="/login">Login here</Link>
               </Typography>
             </Paper>
           </Grid>

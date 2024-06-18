@@ -24,7 +24,7 @@ const RegisterForm = () => {
     const user = { username, email, password, role };
 
     try {
-      const response = await axios.post('/register', user);
+      const response = await axios.post('/auth/register', user);
       console.log('Registered successfully:', response.data);
       setSuccessMessage('Registered successfully! Please log in.'); // Set success message
       setError(null); // Clear any previous errors
